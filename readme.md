@@ -32,23 +32,24 @@ By default, resp. via composer install, Stop will include global functions to ea
 
 * Functions:
 this is probably the fastest way with or without IDE Autocompletion.  
-**If you also have functions named *stop* or *stop_dump* *_s* or *_sd* in your project: rename them, dude! No mercy!** or use the class ;) 
-   
-```stop($var);```
+If you also have functions named **stop** or **stop_dump** or **_s** or **_sd** in your project: **rename them, dude! No mercy!** or use the class ;)  
+
+this will output print_r($var) in a code block and will exit the script:  
+
+    stop($var);
 
 or even shorter
 
-```_s($var);```
+    _s($var);
 
-this will output print_r($var) in a code block and will exit the script
+this will output var_dump($var) in a code block and will exit the script:
 
-```stop_dump($var);```
+    stop_dump($var);
 
 or even shorter
 
-```_sd($var);```
+    _sd($var);
 
-this will output var_dump($var) in a code block and will exit the script
 
 * Static Class Methods:
 
@@ -56,14 +57,17 @@ this will output var_dump($var) in a code block and will exit the script
 
 * OO Style:
 
-   ```$Stop = new \Stop\Stop(\Stop\Stop::ENV_DEV);  
-   $Stop->printr($var);  
-   $Stop->dump($var)```
+```
+    $Stop = new \Stop\Stop(\Stop\Stop::ENV_DEV);  
+    $Stop->printr($var);
+    $Stop->dump($var);
+```    
 
 
 ###TODO
 
 - FirePHP
+- more config
 - render backtrace?
 - render code context 
 
