@@ -1,7 +1,7 @@
 Stop
 ====
 
-Stop provides nice output for debug functions PHP 5.3+
+Stop is a lightweight Dumper for PHP 5.3+ , thus a replacement for ```echo '<pre>';print_r($var);exit;```
 
 During developing pretty often i find myself typing:
 
@@ -11,7 +11,10 @@ or
 
     var_dump($var);exit; 
 
-So this lib provides a shortcut plus some more infos, some nice rendering, plenty of options and autoloading to that.
+So this lib provides a shortcut plus some more infos, some nice rendering, plenty of options and autoloading to that.  
+Its pretty lightweight, if you need more power have a look at: https://github.com/raulfraile/ladybug.
+
+
 
 Install
 ----------
