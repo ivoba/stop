@@ -1,74 +1,78 @@
 <?php
 
+use Stop\Stop;
+
 if (!function_exists('_s')) {
+
     /**
      * print_r variable and exit
      * shortcut function
      * 
      * @param mixed $var 
-     * @param boolean $continue dont exit the script
-     * @param boolean $hide put output in html comment
      */
-    function _s($var, $continue = false, $hide = false) {
-        stop($var, $continue, $hide);
+    function _s($var) {
+        Stop::it($var);
     }
 
 }
-if (!function_exists('_sc')) {
+if (!function_exists('_sg')) {
+
     /**
-     * print_r variable and continue
+     * print_r variable and go on
      * shortcut function
      * 
      * @param mixed $var 
      */
-    function _sc($var) {
-        stop($var, true);
+    function _sg($var) {
+        Stop::it($var, true);
     }
 
 }
-if (!function_exists('_sch')) {
+if (!function_exists('_sgh')) {
+
     /**
-     * print_r variable, continue and hide
+     * print_r variable, go on and hide
      * shortcut function
      * 
      * @param mixed $var 
      */
-    function _sch($var) {
-        stop($var, true, true);
+    function _sgh($var) {
+        Stop::it($var, true, true);
     }
 
 }
 if (!function_exists('_sd')) {
+
     /**
      * var_dump variable and exit 
      * shortcut function
      * 
      * @param mixed $var
-     * @param boolean $continue dont exit the script
-     * @param boolean $hide put output in html comment
      */
-    function _sd($var, $continue = false, $hide = false) {
-        stop_dump($var, $continue, $hide);
+    function _sd($var) {
+        Stop::it($var, Stop::VAR_DUMP);
     }
 
 }
-if (!function_exists('_sdc')) {
+if (!function_exists('_sdg')) {
+
     /**
-     * var_dump variable and continue 
+     * var_dump variable and go on 
      * shortcut function
      */
     function _sdc($var) {
-        stop_dump($var, true);
+        Stop::it($var, Stop::VAR_DUMP, true, false);
     }
 
 }
-if (!function_exists('_sdch')) {
+if (!function_exists('_sdgh')) {
+
     /**
-     * var_dump variable, continue and hide 
+     * var_dump variable, go on and hide 
      * shortcut function
      */
-    function _sdch($var) {
-        stop_dump($var, true, true);
+    function _sdgh($var) {
+        Stop::it($var, Stop::VAR_DUMP, true, true);
     }
 
 }
@@ -81,7 +85,7 @@ if (!function_exists('_sdch')) {
  * @param boolean $hide put output in html comment
  */
 function stop($var, $continue = false, $hide = false) {
-    \Stop\Stop::it($var, $continue, $hide);
+    Stop::it($var, $continue, $hide);
 }
 
 /**
@@ -92,5 +96,5 @@ function stop($var, $continue = false, $hide = false) {
  * @param boolean $hide put output in html comment
  */
 function stop_dump($var, $continue = false, $hide = false) {
-    \Stop\Stop::it($var, $continue, $hide, \Stop\Stop::VAR_DUMP);
+    Stop::it($var, $continue, $hide, Stop::VAR_DUMP);
 }
