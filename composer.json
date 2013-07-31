@@ -2,7 +2,7 @@
     "name": "ivoba/stop",
     "type": "library",
     "description": "nice output for debug functions for PHP 5.3",
-    "keywords": ["debug"],
+    "keywords": ["debug", "dumper", "dump", "var_dump", "print_r"],
     "homepage": "http://github.com/ivoba/stop",
     "license": "MIT",
     "authors": [

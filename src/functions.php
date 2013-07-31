@@ -1,6 +1,14 @@
 <?php
 
-use Stop\Stop;
+use \Stop\Stop;
+use \Stop\Dumper;
+
+/*
+ * @todo use below to give possibility to override functionality of global functions
+ * global $ivoba_stop_go_hide = create_function($var, 'Stop::it($var, true, true)');
+ */
+
+//@todo multiple $args = func_get_args(); in shortcuts 
 
 if (!function_exists('_s')) {
 
@@ -50,7 +58,7 @@ if (!function_exists('_sd')) {
      * @param mixed $var
      */
     function _sd($var) {
-        Stop::it($var, Stop::VAR_DUMP);
+        Stop::it($var, Dumper::VAR_DUMP);
     }
 
 }
@@ -61,7 +69,7 @@ if (!function_exists('_sdg')) {
      * shortcut function
      */
     function _sdc($var) {
-        Stop::it($var, Stop::VAR_DUMP, true, false);
+        Stop::it($var, Dumper::VAR_DUMP, true, false);
     }
 
 }
@@ -72,7 +80,7 @@ if (!function_exists('_sdgh')) {
      * shortcut function
      */
     function _sdgh($var) {
-        Stop::it($var, Stop::VAR_DUMP, true, true);
+        Stop::it($var, Dumper::VAR_DUMP, true, true);
     }
 
 }
@@ -96,5 +104,5 @@ function stop($var, $continue = false, $hide = false) {
  * @param boolean $hide put output in html comment
  */
 function stop_dump($var, $continue = false, $hide = false) {
-    Stop::it($var, $continue, $hide, Stop::VAR_DUMP);
+    Stop::it($var, $continue, $hide, Dumper::VAR_DUMP);
 }
