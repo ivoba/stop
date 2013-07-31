@@ -3,17 +3,21 @@ Stop
 
 Stop is a lightweight Dumper for PHP 5.3+ , thus a replacement for ```echo '<pre>';print_r($var);exit;```
 
-During developing pretty often i find myself typing:
+During developing pretty often i find myself typing: ```echo '<pre>';print_r($var);exit;``` or ```var_dump($var);exit;```
 
-    print_r($var);exit;
+So this lib provides:  
+ - shortcuts 
+ - some more infos as File, Line & Memory 
+ - some nicer rendering with Twitter Bootstrap, 
+ - options for return or continue & hide which will print to javascript console 
+ - disable Stop for prod env
+ - autoloading  
+ - extensibility, if youd like to use jqueryUI f.e just subclass the Dumper and set the class
+ 
 
-or
-
-    var_dump($var);exit; 
-
-So this lib provides a shortcut plus some more infos, some nice rendering, plenty of options and autoloading to that.  
-Its pretty lightweight, if you need more power have a look at: https://github.com/raulfraile/ladybug.
-
+Its pretty lightweight since it just prints the PHP functions. 
+If you need more power have a look at: https://github.com/raulfraile/ladybug or http://raveren.github.io/kint/  
+I also recommend to install XDebug for nicer var_dump rendering.
 
 
 Install
@@ -56,23 +60,16 @@ or even shorter
 
 * Static Class Methods:
 
-   ```\Stop\Stop::it($var, $continue, $hide, \Stop\Stop::VAR_DUMP);```
+   ```
+   use \Stop\Stop;
+   Stop::it($var, \Stop\Dumper::PRINT_R, $continue, $hide, $return);
+   ```
 
 * OO Style:
 
 ```
-    $Stop = new \Stop\Stop(\Stop\Stop::ENV_DEV);  
+    $Stop = new \Stop\Dumper($hide, $continue, $return);  
     $Stop->printr($var);
     $Stop->dump($var);
 ```    
-
-
-###TODO
-
-- FirePHP
-- more config
-- render backtrace?
-- render code context 
-
-any ideas? contribute!
 
