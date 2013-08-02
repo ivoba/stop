@@ -10,76 +10,82 @@ use \Stop\Dumper;
 
 //@todo multiple $args = func_get_args(); in shortcuts 
 
-if (!function_exists('_s')) {
+if (!function_exists('_S')) {
 
     /**
+     * Stop!
      * print_r variable and exit
      * shortcut function
      * 
      * @param mixed $var 
      */
-    function _s($var) {
+    function _S($var) {
         Stop::it($var);
     }
 
 }
-if (!function_exists('_sg')) {
+if (!function_exists('_SG')) {
 
     /**
-     * print_r variable and go on
+     * Stop and Go!
+     * print_r variable and dont exit
      * shortcut function
      * 
      * @param mixed $var 
      */
-    function _sg($var) {
+    function _SG($var) {
         Stop::it($var, true);
     }
 
 }
-if (!function_exists('_sgh')) {
+if (!function_exists('_SGH')) {
 
     /**
-     * print_r variable, go on and hide
+     * Stop and Go and Hide!
+     * print_r variable, dont exit and print to console
      * shortcut function
      * 
      * @param mixed $var 
      */
-    function _sgh($var) {
+    function _SGH($var) {
         Stop::it($var, true, true);
     }
 
 }
-if (!function_exists('_sd')) {
+if (!function_exists('_SD')) {
 
     /**
+     * Stop Dump!
      * var_dump variable and exit 
      * shortcut function
      * 
      * @param mixed $var
      */
-    function _sd($var) {
+    function _SD($var) {
         Stop::it($var, Dumper::VAR_DUMP);
     }
 
 }
-if (!function_exists('_sdg')) {
+if (!function_exists('_SDG')) {
 
     /**
-     * var_dump variable and go on 
+     * Stop Dump and Go!
+     * var_dump variable and dont exit 
      * shortcut function
      */
-    function _sdc($var) {
+    function _SDG($var) {
         Stop::it($var, Dumper::VAR_DUMP, true, false);
     }
 
 }
-if (!function_exists('_sdgh')) {
+if (!function_exists('_SDGH')) {
 
     /**
-     * var_dump variable, go on and hide 
+     * Stop Dump and Go and Hide!
+     * var_dump variable, dont exit and print to console 
      * shortcut function
      */
-    function _sdgh($var) {
+    function _SDGH($var) {
         Stop::it($var, Dumper::VAR_DUMP, true, true);
     }
 
@@ -92,8 +98,8 @@ if (!function_exists('_sdgh')) {
  * @param boolean $continue dont exit the script
  * @param boolean $hide put output in html comment
  */
-function stop($var, $continue = false, $hide = false) {
-    Stop::it($var, $continue, $hide);
+function stop($var, $continue = false, $hide = false, $return = false) {
+    return Stop::it($var, Dumper::PRINT_R, $continue, $hide, $return);
 }
 
 /**
@@ -103,6 +109,6 @@ function stop($var, $continue = false, $hide = false) {
  * @param boolean $continue dont exit the script
  * @param boolean $hide put output in html comment
  */
-function stop_dump($var, $continue = false, $hide = false) {
-    Stop::it($var, $continue, $hide, Dumper::VAR_DUMP);
+function stop_dump($var, $continue = false, $hide = false, $return = false) {
+    return Stop::it($var, Dumper::VAR_DUMP, $continue, $hide, $return);
 }
