@@ -69,6 +69,8 @@ Shortcut functions for options:
 ```
    use \Stop\Stop;
    Stop::it($var, \Stop\Dumper::PRINT_R, $continue, $hide, $return);
+   Stop::dump($var, $continue, $hide, $return);
+   Stop::print_r($var, $continue, $hide, $return);
 ```
 
 ###OO Style:

@@ -33,7 +33,7 @@ class Dumper {
     const VAR_DUMP = 'var_dump';
 
     public static $functions = array(
-        '_s', '_sd', '_sg', '_sdg', '_sdgh', '_sgh', 'stop', 'stop_dump'
+        '_S', '_SD', '_SG', '_SDG', '_SDGH', '_SDGH', 'stop', 'stop_dump'
     );
     protected $hide;
     protected $return;
@@ -69,9 +69,6 @@ class Dumper {
     protected function render(\Stop\Model\Dump $dump) {
         $out = str_replace(array('{claim}', '{file}', '{line}', '{memory}', '{dump}'), array($dump->claim, $dump->file, $dump->line, $dump->memory, $dump->dump), $this->getTheme());
         if ($this->hide) {
-//            $out = "<!-- 
-//                    " . $out .
-//                    " -->";
             $out_temp = "<script>\r\n//<![CDATA[\r\nif(!console){var console={log:function(){}}}";
             $output = explode("\n", $dump->dump);
             $out_temp .= "console.log(\"$dump->claim\");";
@@ -141,7 +138,7 @@ class Dumper {
         if (!$index) {
             //from static?
             foreach ($bt as $key => $value) {
-                if ($value['function'] == 'it') {
+                if ($value['function'] == '::' && ($value['function'] == 'it' || $value['function'] == 'dump' || $value['function'] == 'print_r')) {
                     $index = $key;
                     break;
                 }

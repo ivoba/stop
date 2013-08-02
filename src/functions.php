@@ -20,7 +20,7 @@ if (!function_exists('_S')) {
      * @param mixed $var 
      */
     function _S($var) {
-        Stop::it($var);
+        Stop::print_r($var);
     }
 
 }
@@ -34,7 +34,7 @@ if (!function_exists('_SG')) {
      * @param mixed $var 
      */
     function _SG($var) {
-        Stop::it($var, true);
+        Stop::print_r($var, true);
     }
 
 }
@@ -48,7 +48,7 @@ if (!function_exists('_SGH')) {
      * @param mixed $var 
      */
     function _SGH($var) {
-        Stop::it($var, true, true);
+        Stop::print_r($var, true, true);
     }
 
 }
@@ -62,7 +62,7 @@ if (!function_exists('_SD')) {
      * @param mixed $var
      */
     function _SD($var) {
-        Stop::it($var, Dumper::VAR_DUMP);
+        Stop::dump($var);
     }
 
 }
@@ -74,7 +74,7 @@ if (!function_exists('_SDG')) {
      * shortcut function
      */
     function _SDG($var) {
-        Stop::it($var, Dumper::VAR_DUMP, true, false);
+        Stop::dump($var, true, false);
     }
 
 }
@@ -86,7 +86,7 @@ if (!function_exists('_SDGH')) {
      * shortcut function
      */
     function _SDGH($var) {
-        Stop::it($var, Dumper::VAR_DUMP, true, true);
+        Stop::dump($var, true, true);
     }
 
 }
@@ -112,3 +112,4 @@ function stop($var, $continue = false, $hide = false, $return = false) {
 function stop_dump($var, $continue = false, $hide = false, $return = false) {
     return Stop::it($var, Dumper::VAR_DUMP, $continue, $hide, $return);
 }
+

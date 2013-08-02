@@ -59,6 +59,32 @@ final class Stop {
         }
         return $Stop->var_dump($var);
     }
+    
+    /**
+     * var_dump it!
+     * 
+     * @param type $var
+     * @param type $continue
+     * @param type $hide
+     * @param type $return
+     * @return type
+     */
+    public static function dump($var, $continue = false, $hide = false, $return = false) {
+        return self::it($var, \Stop\Dumper::VAR_DUMP, $continue, $hide, $return);
+    }
+    
+    /**
+     * print_r it!
+     * 
+     * @param type $var
+     * @param boolean $continue
+     * @param boolean $hide
+     * @param boolean $return
+     * @return type
+     */
+    public static function print_r($var, $continue = false, $hide = false, $return = false) {
+        return self::it($var, \Stop\Dumper::PRINT_R, $continue, $hide, $return);
+    }
 
     public static function setDumperClass($class) {
         self::$DumperClass = $class;
