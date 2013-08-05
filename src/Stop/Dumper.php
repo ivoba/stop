@@ -147,7 +147,7 @@ class Dumper {
         if (!$index) {
             //from object?
             foreach ($bt as $key => $value) {
-                if ($value['function'] == 'printr' || $value['function'] == 'dump') {
+                if ($value['function'] == 'print_r' || $value['function'] == 'var_dump') {
                     $index = $key;
                     break;
                 }
