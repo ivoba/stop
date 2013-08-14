@@ -2,12 +2,15 @@
     "name": "ivoba/stop",
     "type": "library",
     "description": "nice output for debug functions for PHP 5.3",
-    "keywords": ["debug", "dumper", "dump", "var_dump", "print_r"],
+    "keywords": ["debug", "dumper", "dump", "var_dump", "print_r" ],
     "homepage": "http://github.com/ivoba/stop",
     "license": "MIT",
     "authors": [
         {"name": "Ivo Bathke", "email": "ivo.bathke@gmail.com"}
     ],
+    "suggest": {
+	"ext-xdebug": "Xdebug provides nicer output for var_dump"
+    },
     "autoload": {
         "psr-0": {"Stop": "src/"},
 	"files": ["src/functions.php"]

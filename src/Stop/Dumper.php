@@ -84,6 +84,7 @@ class Dumper {
             $out_temp .= "\r\n//]]>\r\n</script>";
             $out = $out_temp;
         }
+
         if ($this->return) {
             return $out;
         } elseif ($this->continue) {
@@ -95,7 +96,7 @@ class Dumper {
     }
 
     protected function createDump($var, $method) {
-        $claim = 'Stop' . ($this->continue ? ' and Go' : '') . ($this->hide ? ' and Hide' : '') .'!';
+        $claim = 'Stop' . ($this->continue ? ' and Go' : '') . ($this->hide ? ' and Hide' : '') . '!';
         $bt = debug_backtrace();
         $index = $this->resolveCallOccurence($bt);
         if ($index) {
@@ -121,8 +122,14 @@ class Dumper {
                 var_dump($var);
             }
             $dump = ob_get_clean();
+            if (function_exists('xdebug_disable')) {
+                if (strpos($dump, "<pre class='xdebug-var-dump' dir='ltr'>") !== false) {
+                    //strip xdebug rendered pre's
+                    $dump = substr($dump, strlen("<pre class='xdebug-var-dump' dir='ltr'>"));
+                    $dump = substr($dump, 0, strlen($dump) - strlen('</pre>'));
+                }
+            }
         }
-
         return new \Stop\Model\Dump($claim, $file, $line, $memory, $dump);
     }
 
