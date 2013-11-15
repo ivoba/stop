@@ -13,6 +13,8 @@ So this lib provides:
  - disable Stop for prod env
  - autoloading  
  - extensibility, if youd like to use jqueryUI f.e just subclass the Dumper and set the class
+ - context awareness: if you are in console it will render in text mode,  
+   if in ajax mode it will render in json mode
  
 
 Its pretty lightweight since it just prints the PHP functions. 
@@ -34,9 +36,9 @@ then
 Using Stop
 ----------
 
+###Functions:
 By default, resp. via composer install, Stop will include global functions to ease access to the debug methods
 
-###Functions:
 this is probably the fastest way with or without IDE Autocompletion.  
 If you also have functions named **stop** or **stop_dump** in your project: **rename them, dude! No mercy!** or use the class ;)  
 
@@ -58,10 +60,10 @@ There are 3 options that can be passed as parameters:
 
 Shortcut functions for options:
 
-- ```_SG($var);``` Stop and Go!
-- ```_SGH($var);``` Stop and Go and Hide!
-- ```_SDG($var);``` Stop Dump and Go!
-- ```_SDGH($var);``` Stop Dump and Go and Hide!
+- ```_SG($var);``` Stop and Go! (resp. print_r)
+- ```_SGH($var);``` Stop and Go and Hide! (resp. print_r)
+- ```_SDG($var);``` Stop Dump and Go! (resp. var_dump)
+- ```_SDGH($var);``` Stop Dump and Go and Hide! (resp. var_dump)
 
 
 ###Static Class Methods:
