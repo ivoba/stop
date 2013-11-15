@@ -3,17 +3,17 @@
 /**
  * The MIT License (MIT)
  * Copyright (c) 2013 Ivo Bathke
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
  * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
  * sell copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,14 +27,21 @@
 
 namespace Stop;
 
-final class Stop {
+use Stop\Dumper\AbstractDumper;
 
-    protected static $DumperClass = '\Stop\Dumper';
+final class Stop
+{
+
+    const DEFAULT_DUMPER = '\Stop\Dumper\Bootstrap';
+    const CONSOLE_DUMPER = '\Stop\Dumper\Text';
+    const AJAX_DUMPER = '\Stop\Dumper\Json';
+
+    protected static $DumperClass = self::DEFAULT_DUMPER;
     protected static $Enabled = true;
 
     /**
      * Dump it!
-     * 
+     *
      * @param type $var
      * @param type $method
      * @param type $continue
@@ -42,51 +49,69 @@ final class Stop {
      * @param type $return
      * @return type
      */
-    public static function it($var, $method = \Stop\Dumper::PRINT_R, $continue = false, $hide = false, $return = false) {
-        if(self::$Enabled === false){
+    public static function it($var, $method = AbstractDumper::PRINT_R, $continue = false, $hide = false, $return = false)
+    {
+
+        if (self::$Enabled === false) {
             return null;
         }
+        //detect console or ajax
+        if (php_sapi_name() == 'cli') {
+            //no custom dumper?
+            if (self::$DumperClass == self::DEFAULT_DUMPER) {
+                self::$DumperClass = self::CONSOLE_DUMPER;
+            }
+        } elseif (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            if (self::$DumperClass == self::DEFAULT_DUMPER) {
+                self::$DumperClass = self::AJAX_DUMPER;
+            }
+        }
+
         try {
             $Stop = new self::$DumperClass($hide, $continue, $return);
         } catch (\Exception $exc) {
             error_log($exc->getMessage());
             //fallback
-            $Stop = new \Stop\Dumper($hide, $continue, $return);
+            $default = self::DEFAULT_DUMPER;
+            $Stop = new $default($hide, $continue, $return);
         }
 
-        if ($method == \Stop\Dumper::PRINT_R) {
+        if ($method == AbstractDumper::PRINT_R) {
             return $Stop->print_r($var);
         }
         return $Stop->var_dump($var);
     }
-    
+
     /**
      * var_dump it!
-     * 
+     *
      * @param type $var
      * @param type $continue
      * @param type $hide
      * @param type $return
      * @return type
      */
-    public static function dump($var, $continue = false, $hide = false, $return = false) {
-        return self::it($var, \Stop\Dumper::VAR_DUMP, $continue, $hide, $return);
+    public static function dump($var, $continue = false, $hide = false, $return = false)
+    {
+        return self::it($var, AbstractDumper::VAR_DUMP, $continue, $hide, $return);
     }
-    
+
     /**
      * print_r it!
-     * 
+     *
      * @param type $var
      * @param boolean $continue
      * @param boolean $hide
      * @param boolean $return
      * @return type
      */
-    public static function print_r($var, $continue = false, $hide = false, $return = false) {
-        return self::it($var, \Stop\Dumper::PRINT_R, $continue, $hide, $return);
+    public static function print_r($var, $continue = false, $hide = false, $return = false)
+    {
+        return self::it($var, AbstractDumper::PRINT_R, $continue, $hide, $return);
     }
 
-    public static function setDumperClass($class) {
+    public static function setDumperClass($class)
+    {
         self::$DumperClass = $class;
     }
 
