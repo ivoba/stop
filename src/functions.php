@@ -99,7 +99,7 @@ if (!function_exists('_SDGH')) {
  * @param boolean $hide put output in html comment
  */
 function stop($var, $continue = false, $hide = false, $return = false) {
-    return Stop::it($var, Dumper::PRINT_R, $continue, $hide, $return);
+    return Stop::it($var, Dumper\AbstractDumper::PRINT_R, $continue, $hide, $return);
 }
 
 /**
@@ -110,6 +110,6 @@ function stop($var, $continue = false, $hide = false, $return = false) {
  * @param boolean $hide put output in html comment
  */
 function stop_dump($var, $continue = false, $hide = false, $return = false) {
-    return Stop::it($var, Dumper::VAR_DUMP, $continue, $hide, $return);
+    return Stop::it($var, Dumper\AbstractDumper::VAR_DUMP, $continue, $hide, $return);
 }
 
