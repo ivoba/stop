@@ -49,7 +49,11 @@ final class Stop
      * @param type $return
      * @return type
      */
-    public static function it($var, $method = AbstractDumper::PRINT_R, $continue = false, $hide = false, $return = false)
+    public static function it($var,
+                              $method = AbstractDumper::PRINT_R,
+                              $continue = false,
+                              $hide = false,
+                              $return = false)
     {
 
         if (self::$Enabled === false) {
@@ -110,6 +114,24 @@ final class Stop
         return self::it($var, AbstractDumper::PRINT_R, $continue, $hide, $return);
     }
 
+    /**
+     * dump a variable as json
+     *
+     * @param $var
+     * @param bool $continue
+     * @param bool $hide
+     * @param bool $return
+     */
+    public static function json($var, $continue = false, $hide = false, $return = false){
+        $Stop = new \Stop\Dumper\Json($hide, $continue, $return, Dumper\AbstractDumper::FORMAT_JSON);
+        $Stop->var_dump($var);
+    }
+
+    /**
+     * set the dumper class yourself
+     *
+     * @param $class
+     */
     public static function setDumperClass($class)
     {
         self::$DumperClass = $class;

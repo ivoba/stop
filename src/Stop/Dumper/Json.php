@@ -20,6 +20,7 @@ class Json extends AbstractDumper
             //TODO implement
         }
         header('Content-type: application/json');
+        //@Todo if php >= 5.4 use JSON_PRETTY_PRINT
         echo json_encode($dump);
         exit;
 
@@ -45,8 +46,13 @@ class Json extends AbstractDumper
             $type = gettype($var);
             if ($type == 'string') {
                 $type .= '(' . strlen($var) . ')';
-                $value = $var;
-
+                if($this->format == self::FORMAT_JSON){
+                    $value = json_decode($var);
+                    $type = 'json/'.$type;
+                }
+                else{
+                    $value = $var;
+                }
             } elseif ($type == 'object') {
                 $type .= '(' . get_class($var) . ')';
                 $value = print_r($var, true);

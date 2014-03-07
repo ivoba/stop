@@ -6,16 +6,21 @@
     "homepage": "http://github.com/ivoba/stop",
     "license": "MIT",
     "authors": [
-        {"name": "Ivo Bathke", "email": "ivo.bathke@gmail.com"}
+        {
+            "name": "Ivo Bathke",
+            "email": "ivo.bathke@gmail.com"
+        }
     ],
     "suggest": {
-	"ext-xdebug": "Xdebug provides nicer output for var_dump"
+        "ext-xdebug": "Xdebug provides nicer output for var_dump"
     },
     "autoload": {
-        "psr-0": {"Stop": "src/"},
-	"files": ["src/functions.php"]
+        "psr-0": {
+            "Stop": "src/"
+        },
+        "files": ["src/functions.php"]
     },
     "require": {
-    	"php": ">=5.3.0"
+        "php": ">=5.3.0"
     }
 }

@@ -38,4 +38,16 @@ class JsonTest extends \PHPUnit_Framework_TestCase {
         $this->assertContains('NULL', $output, 'null as var_dump');
     }
 
+    public function testJsonFormat(){
+        $Stop = new \Stop\Dumper\Json(false, false, true, \Stop\Dumper\AbstractDumper::FORMAT_JSON);
+        $jsonFixture = file_get_contents(__DIR__ . '/../Fixtures/test.json');
+        $output = $Stop->var_dump($jsonFixture);
+        $obj = json_decode($output);
+        $this->assertObjectHasAttribute('claim', $obj);
+        $this->assertContains('json\/string', $output, 'json/string');
+        $this->assertContains('Stop\/Tests\/JsonTest.php', $output, 'File is found');
+        $this->assertEquals('44', $obj->line);
+        $this->assertEquals('pa1', $obj->dump->value->pa1->name);
+    }
+
 }

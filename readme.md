@@ -3,18 +3,24 @@ Stop
 
 Stop is a lightweight Dumper for PHP 5.3+ , thus a replacement for ```echo '<pre>';print_r($var);exit;```
 
+[![Build Status](https://secure.travis-ci.org/ivoba/stop.png?branch=master)](http://travis-ci.org/ivoba/stop)
+[![Total Downloads](https://poser.pugx.org/ivoba/stop/downloads.png)](https://packagist.org/packages/ivoba/stop)
+[![Dependency Status](https://www.versioneye.com/php/ivoba:stop/master/badge.png)](https://www.versioneye.com/php/ivoba:stop/master)
+
 During developing pretty often i find myself typing: ```echo '<pre>';print_r($var);exit;``` or ```var_dump($var);exit;```
 
-So this lib provides:  
- - shortcuts 
- - some more infos as File, Line & Memory 
- - some nicer rendering with Twitter Bootstrap, 
- - options for return or continue & hide which will print to javascript console 
- - disable Stop for prod env
- - autoloading  
- - extensibility, if youd like to use jqueryUI f.e just subclass the Dumper and set the class
- - context awareness: if you are in console it will render in text mode,  
-   if in ajax mode it will render in json mode
+So this lib provides:
+
+- shortcuts
+- some more infos as File, Line & Memory
+- some nicer rendering with Twitter Bootstrap,
+- options for return or continue & hide which will print to javascript console
+- disable Stop for prod env
+- autoloading
+- extensibility, if youd like to use jqueryUI f.e just subclass the Dumper and set the class
+- context awareness: if you are in console it will render in text mode,
+  if in ajax mode it will render in json mode
+- dumper for json strings
  
 
 Its pretty lightweight since it just prints the PHP functions. 
@@ -64,6 +70,8 @@ Shortcut functions for options:
 - ```_SGH($var);``` Stop and Go and Hide! (resp. print_r)
 - ```_SDG($var);``` Stop Dump and Go! (resp. var_dump)
 - ```_SDGH($var);``` Stop Dump and Go and Hide! (resp. var_dump)
+- ```_SJ($json);``` Stop Dump as Json! (decodes a json string and send it inside the dump object as json to the browser.
+Use browser addons like JSONovich for pretty rendering.)
 
 
 ###Static Class Methods:

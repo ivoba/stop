@@ -7,17 +7,30 @@ abstract class AbstractDumper implements DumperInterface {
     const PRINT_R = 'print_r';
     const VAR_DUMP = 'var_dump';
 
+    const FORMAT_JSON = 'json';
+
     public static $functions = array(
-        '_S', '_SD', '_SG', '_SDG', '_SDGH', '_SDGH', 'stop', 'stop_dump'
+        '_S', '_SD', '_SG', '_SDG', '_SDGH', '_SDGH', '_SJ', 'stop', 'stop_dump'
     );
     protected $hide;
     protected $return;
     protected $continue;
+    protected $format;
 
-    public function __construct($hide = false, $continue = false, $return = false) {
+    /**
+     * @param bool $hide
+     * @param bool $continue
+     * @param bool $return
+     * @param null|string $format
+     */
+    public function __construct($hide = false,
+                                $continue = false,
+                                $return = false,
+                                $format = null) {
         $this->hide = $hide;
         $this->continue = $continue;
         $this->return = $return;
+        $this->format = $format;
     }
 
     public function print_r($var) {
