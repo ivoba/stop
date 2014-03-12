@@ -19,9 +19,15 @@ class Json extends AbstractDumper
         } elseif ($this->continue) {
             //TODO implement
         }
-        header('Content-type: application/json');
-        //@Todo if php >= 5.4 use JSON_PRETTY_PRINT
-        echo json_encode($dump);
+        if (php_sapi_name() != 'cli') {
+            header('Content-type: application/json');
+        }
+        $options = null;
+        //if php >= 5.4 use JSON_PRETTY_PRINT
+        if(PHP_VERSION_ID > 50300){
+            $options = JSON_PRETTY_PRINT;
+        }
+        echo json_encode($dump, $options);
         exit;
 
     }
