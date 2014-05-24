@@ -38,7 +38,7 @@ Output:
 
     protected function createDump($var, $method)
     {
-        $claim = $this->resolveClaim();
+        $claim = $this->resolveClaim($method);
         $file = '';
         $line = '';
         if ($fileLine = $this->resolveFileLine()) {
@@ -53,7 +53,14 @@ Output:
         }
         if ($method == self::PRINT_R) {
             $dump = print_r($var, true);
-        } else {
+        }
+        elseif($method == self::GET_TYPE){
+            $dumpArr = $this->resolveType($var);
+            $func = function(&$value, $key) { $value = $key . ': ' .$value; };
+            array_walk($dumpArr, $func);
+            $dump = implode("\n", $dumpArr);
+        }
+        else {
             ob_start();
             var_dump($var);
             $dump = ob_get_clean();

@@ -13,6 +13,7 @@ interface DumperInterface {
 
     public function print_r($var);
     public function var_dump($var);
+    public function get_type($var);
 
 
 }

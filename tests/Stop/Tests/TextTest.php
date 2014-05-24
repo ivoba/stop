@@ -7,9 +7,11 @@ require_once __DIR__ . '/../../../src/Stop/Dumper/AbstractDumper.php';
 require_once __DIR__ . '/../../../src/Stop/Dumper/Text.php';
 require_once __DIR__ . '/../../../src/Stop/Model/Dump.php';
 
-class TextTest extends \PHPUnit_Framework_TestCase {
+class TextTest extends \PHPUnit_Framework_TestCase
+{
 
-    public function testDumpReturn() {
+    public function testDumpReturn()
+    {
         $Stop = new \Stop\Dumper\Text(false, false, true);
         $output = $Stop->var_dump('String');
         $this->assertContains('string(6) "String"', $output, 'var_dump the variable');
@@ -21,7 +23,8 @@ class TextTest extends \PHPUnit_Framework_TestCase {
         $this->assertContains('Stop and Go!', $output, 'Go is found');
     }
 
-    public function testPrintReturn() {
+    public function testPrintReturn()
+    {
         $Stop = new \Stop\Dumper\Text(false, false, true);
         $output = $Stop->print_r('String');
         $this->assertContains('String', $output, 'print_r');
@@ -31,6 +34,29 @@ class TextTest extends \PHPUnit_Framework_TestCase {
         $this->assertContains('bool(false)', $output, 'Boolean as var_dump');
         $output = $Stop->print_r(null);
         $this->assertContains('NULL', $output, 'null as var_dump');
+    }
+
+    public function testGetType()
+    {
+        $Stop = new \Stop\Dumper\Text($hide = false,
+            $continue = false,
+            $return = true,
+            $format = null);
+        $output = $Stop->get_type($Stop);
+        $this->assertContains('StopType!', $output);
+        $this->assertContains('Class: Stop\Dumper\Text', $output);
+        $this->assertContains('Interfaces: Stop\Dumper\DumperInterface', $output);
+
+        $output = $Stop->get_type(array(1,2,3,4));
+        $this->assertContains('StopType!', $output);
+        $this->assertContains('Type: array', $output);
+        $this->assertContains('Count: 4', $output);
+
+        $output = $Stop->get_type($str = "asdasdasd asdasdasd");
+        $this->assertContains('StopType!', $output);
+        $this->assertContains('Type: string', $output);
+        $this->assertContains('Length: 19', $output);
+
     }
 
 }

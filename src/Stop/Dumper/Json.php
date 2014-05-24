@@ -34,7 +34,7 @@ class Json extends AbstractDumper
 
     protected function createDump($var, $method)
     {
-        $claim = $this->resolveClaim();
+        $claim = $this->resolveClaim($method);
         $file = '';
         $line = '';
         if ($fileLine = $this->resolveFileLine()) {
@@ -48,7 +48,12 @@ class Json extends AbstractDumper
         }
         if ($method == self::PRINT_R) {
             $dump = print_r($var, true);
-        } else {
+        }
+        elseif($method == self::GET_TYPE){
+            $dumpArr = $this->resolveType($var);
+            $dump = $dumpArr;
+        }
+        else {
             $type = gettype($var);
             if ($type == 'string') {
                 $type .= '(' . strlen($var) . ')';

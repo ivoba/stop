@@ -56,7 +56,7 @@ class Bootstrap extends AbstractDumper
 
     protected function createDump($var, $method)
     {
-        $claim = $this->resolveClaim();
+        $claim = $this->resolveClaim($method);
         $file = '';
         $line = '';
         if ($fileLine = $this->resolveFileLine()) {
@@ -70,7 +70,19 @@ class Bootstrap extends AbstractDumper
         }
         if ($method == self::PRINT_R) {
             $dump = print_r($var, true);
-        } else {
+        }
+        elseif($method == self::GET_TYPE){
+            $dumpArr = $this->resolveType($var);
+            $delimiter = '<br/>';
+            $func = function(&$value, $key) { $value = '<strong>'.$key.':</strong>' .$value; };
+            if($this->hide){
+                $func = function(&$value, $key) { $value = $key.':' .$value; };
+                $delimiter = "\n";
+            }
+            array_walk($dumpArr, $func);
+            $dump = implode($delimiter, $dumpArr);
+        }
+        else {
             //TODO if xdebug is enabled and hide is active use var_export or ini_set('html_errors', 0);
             ob_start();
             if (function_exists('xdebug_disable') && $this->hide) {

@@ -6,11 +6,12 @@ abstract class AbstractDumper implements DumperInterface {
 
     const PRINT_R = 'print_r';
     const VAR_DUMP = 'var_dump';
+    const GET_TYPE = 'get_type';
 
     const FORMAT_JSON = 'json';
 
     public static $functions = array(
-        '_S', '_SD', '_SG', '_SDG', '_SDGH', '_SDGH', '_SJ', 'stop', 'stop_dump'
+        '_S', '_SD', '_SG', '_SDG', '_SDGH', '_SDGH', '_SJ', 'stop', 'stop_dump', 'stop_type', '_ST', '_STG'
     );
     protected $hide;
     protected $return;
@@ -43,10 +44,18 @@ abstract class AbstractDumper implements DumperInterface {
         return $this->render($dump);
     }
 
+    public function get_type($var){
+        $dump = $this->createDump($var, self::GET_TYPE);
+        return $this->render($dump);
+    }
+
     abstract protected function render(\Stop\Model\Dump $dump);
     abstract protected function createDump($var, $method);
 
-    protected function resolveClaim(){
+    protected function resolveClaim($method = null){
+        if($method == self::GET_TYPE){
+            return 'StopType' . ($this->continue ? ' and Go' : '') . ($this->hide ? ' and Hide' : '') . '!';
+        }
         return 'Stop' . ($this->continue ? ' and Go' : '') . ($this->hide ? ' and Hide' : '') . '!';
     }
 
@@ -91,6 +100,33 @@ abstract class AbstractDumper implements DumperInterface {
             }
         }
         return $index;
+    }
+
+    protected function resolveType($var){
+        $dumpArr = array();
+        if (is_object($var)) {
+            $dumpArr['Class'] = get_class($var);
+            if ($parent = get_parent_class($var)) {
+                $dumpArr['Extends'] = $parent; //@todo get the whole tree
+            }
+            if ($interfaces = class_implements($var)) {
+                $dumpArr['Interfaces'] = implode("\n", $interfaces);
+            }
+            if (PHP_VERSION_ID > 50300) {
+                if ($traits = class_uses($var)) {
+                    $dumpArr['Traits'] = implode("\n", $traits);
+                }
+            }
+        } else {
+            $dumpArr['Type'] = gettype($var);
+            if (is_array($var)) {
+                $dumpArr['Count'] = count($var);
+            }
+            if (is_string($var)) {
+                $dumpArr['Length'] = strlen($var);
+            }
+        }
+        return $dumpArr;
     }
 
     public function getTheme() {

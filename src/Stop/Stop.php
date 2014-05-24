@@ -128,6 +128,17 @@ final class Stop
     }
 
     /**
+     * @param $var
+     * @param bool $continue
+     * @param bool $hide
+     * @param bool $return
+     * @return type
+     */
+    public static function type($var, $continue = false, $hide = false, $return = false){
+        return self::it($var, AbstractDumper::GET_TYPE, $continue, $hide, $return);
+    }
+
+    /**
      * set the dumper class yourself
      *
      * @param $class

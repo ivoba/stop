@@ -50,4 +50,18 @@ class JsonTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('pa1', $obj->dump->value->pa1->name);
     }
 
+    public function testGetType()
+    {
+        $Stop = new \Stop\Dumper\Json($hide = false,
+                                    $continue = false,
+                                    $return = true,
+                                    \Stop\Dumper\AbstractDumper::FORMAT_JSON);
+        $output = $Stop->get_type($Stop);
+        print_r($output);echo "\n\r";
+        $output = $Stop->get_type(array(1,2,3,4));
+        print_r($output);echo "\n\r";
+        $output = $Stop->get_type($str = "asdasdasd asdasdasd");
+        print_r($output);echo "\n\r";
+    }
+
 }
