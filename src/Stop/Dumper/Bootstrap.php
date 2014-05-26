@@ -20,9 +20,7 @@ class Bootstrap extends AbstractDumper
                             <strong>Line:</strong> {line}
                             <div class="pull-right"><strong>Memory:</strong> {memory}</div></small></h1>
                         </div>
-                        <div class="row"><div class="span12"><pre>
-                        {dump}
-                        </pre></div></div></div>';
+                        <div class="row"><div class="span12"><pre>{dump}</pre></div></div></div>';
 
     protected function render(\Stop\Model\Dump $dump)
     {
@@ -74,7 +72,7 @@ class Bootstrap extends AbstractDumper
         elseif($method == self::GET_TYPE){
             $dumpArr = $this->resolveType($var);
             $delimiter = '<br/>';
-            $func = function(&$value, $key) { $value = '<strong>'.$key.':</strong>' .$value; };
+            $func = function(&$value, $key) { $value = '<strong>'.$key.':</strong> ' .$value; };
             if($this->hide){
                 $func = function(&$value, $key) { $value = $key.':' .$value; };
                 $delimiter = "\n";

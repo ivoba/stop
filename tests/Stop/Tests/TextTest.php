@@ -12,24 +12,33 @@ class TextTest extends \PHPUnit_Framework_TestCase
 
     public function testDumpReturn()
     {
-        $Stop = new \Stop\Dumper\Text(false, false, true);
+        $Stop = new \Stop\Dumper\Text($hide = false,
+                                      $continue = false,
+                                      $return = true,
+                                      $format = null);
         $output = $Stop->var_dump('String');
         $this->assertContains('string(6) "String"', $output, 'var_dump the variable');
         $this->assertContains('tests/Stop/Tests/TextTest.php', $output, 'File is found');
-        $this->assertContains('Line: 14', $output, 'Line is found');
+        $this->assertContains('Line: 19', $output, 'Line is found');
 
-        $Stop = new \Stop\Dumper\Text(false, true, true);
+        $Stop = new \Stop\Dumper\Text($hide = false,
+                                      $continue = true,
+                                      $return = true,
+                                      $format = null);
         $output = $Stop->var_dump('String');
         $this->assertContains('Stop and Go!', $output, 'Go is found');
     }
 
     public function testPrintReturn()
     {
-        $Stop = new \Stop\Dumper\Text(false, false, true);
+        $Stop = new \Stop\Dumper\Text($hide = false,
+                                      $continue = false,
+                                      $return = true,
+                                      $format = null);
         $output = $Stop->print_r('String');
         $this->assertContains('String', $output, 'print_r');
         $this->assertContains('tests/Stop/Tests/TextTest.php', $output, 'File is found');
-        $this->assertContains('Line: 26', $output, 'Line is found');
+        $this->assertContains('Line: 38', $output, 'Line is found');
         $output = $Stop->print_r(false);
         $this->assertContains('bool(false)', $output, 'Boolean as var_dump');
         $output = $Stop->print_r(null);
@@ -39,9 +48,9 @@ class TextTest extends \PHPUnit_Framework_TestCase
     public function testGetType()
     {
         $Stop = new \Stop\Dumper\Text($hide = false,
-            $continue = false,
-            $return = true,
-            $format = null);
+                                      $continue = false,
+                                      $return = true,
+                                      $format = null);
         $output = $Stop->get_type($Stop);
         $this->assertContains('StopType!', $output);
         $this->assertContains('Class: Stop\Dumper\Text', $output);

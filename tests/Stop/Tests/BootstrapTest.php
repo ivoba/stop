@@ -61,4 +61,27 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase {
         $this->assertContains('console.log("Stop and Go and Hide!")', $output, 'Hide and Go is found');
     }
 
+    public function testGetType()
+    {
+        $Stop = new \Stop\Dumper\Bootstrap($hide = false,
+            $continue = false,
+            $return = true,
+            $format = null);
+        $output = $Stop->get_type($Stop);
+        $this->assertContains('StopType!', $output);
+        $this->assertContains('<strong>Class:</strong>Stop\Dumper\Bootstrap', $output);
+        $this->assertContains('<strong>Interfaces:</strong>Stop\Dumper\DumperInterface', $output);
+
+        $output = $Stop->get_type(array(1,2,3,4));
+        $this->assertContains('StopType!', $output);
+        $this->assertContains('<strong>Type:</strong>array', $output);
+        $this->assertContains('<strong>Count:</strong>4', $output);
+
+        $output = $Stop->get_type($str = "asdasdasd asdasdasd");
+        $this->assertContains('StopType!', $output);
+        $this->assertContains('<strong>Type:</strong>string', $output);
+        $this->assertContains('<strong>Length:</strong>19', $output);
+
+    }
+
 }

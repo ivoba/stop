@@ -57,11 +57,18 @@ class JsonTest extends \PHPUnit_Framework_TestCase {
                                     $return = true,
                                     \Stop\Dumper\AbstractDumper::FORMAT_JSON);
         $output = $Stop->get_type($Stop);
-        print_r($output);echo "\n\r";
+        $this->assertContains('StopType!', $output);
+        $this->assertContains('"Class":"Stop\\\Dumper\\\Json', $output);
+        $this->assertContains('Stop\\\Dumper\\\DumperInterface', $output);
+        $this->assertContains('Stop\/Tests\/JsonTest.php', $output, 'File is found');
         $output = $Stop->get_type(array(1,2,3,4));
-        print_r($output);echo "\n\r";
+        $this->assertContains('StopType!', $output);
+        $this->assertContains('"Type":"array"', $output);
+        $this->assertContains('"Count":4', $output);
         $output = $Stop->get_type($str = "asdasdasd asdasdasd");
-        print_r($output);echo "\n\r";
+        $this->assertContains('StopType!', $output);
+        $this->assertContains('"Type":"string"', $output);
+        $this->assertContains('"Length":19', $output);
     }
 
 }

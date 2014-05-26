@@ -99,7 +99,7 @@ if (!function_exists('_SDGH')) {
 
 if (!function_exists('_SJ')) {
     /**
-     * Stop Dump as Json;
+     * Stop Dump as Json!
      * if you want to dump a json string with json header, use this function!
      *
      * @param $var
@@ -107,6 +107,32 @@ if (!function_exists('_SJ')) {
     function _SJ($var)
     {
         Stop::json($var, $continue = false, $hide = false, $return = false);
+    }
+}
+
+if (!function_exists('_ST')) {
+    /**
+     * Stop Type!
+     * just show the type of a variable, use this function!
+     *
+     * @param $var
+     */
+    function _ST($var)
+    {
+        Stop::type($var, $continue = false, $hide = false, $return = false);
+    }
+}
+
+if (!function_exists('_STG')) {
+    /**
+     * Stop Type!
+     * just show the type of a variable, use this function!
+     *
+     * @param $var
+     */
+    function _STG($var)
+    {
+        Stop::type($var, $continue = true, $hide = false, $return = false);
     }
 }
 
@@ -132,4 +158,18 @@ function stop($var, $continue = false, $hide = false, $return = false)
 function stop_dump($var, $continue = false, $hide = false, $return = false)
 {
     return Stop::it($var, Dumper\AbstractDumper::VAR_DUMP, $continue, $hide, $return);
+}
+
+/**
+ * show variable type without content
+ *
+ * @param $var
+ * @param bool $continue
+ * @param bool $hide
+ * @param bool $return
+ * @return mixed
+ */
+function stop_type($var, $continue = false, $hide = false, $return = false)
+{
+    return Stop::it($var, Dumper\AbstractDumper::GET_TYPE, $continue, $hide, $return);
 }

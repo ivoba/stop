@@ -83,6 +83,9 @@ final class Stop
         if ($method == AbstractDumper::PRINT_R) {
             return $Stop->print_r($var);
         }
+        if ($method == AbstractDumper::GET_TYPE) {
+            return $Stop->get_type($var);
+        }
         return $Stop->var_dump($var);
     }
 

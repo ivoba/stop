@@ -93,7 +93,7 @@ abstract class AbstractDumper implements DumperInterface {
         if (!$index) {
             //from object?
             foreach ($bt as $key => $value) {
-                if ($value['function'] == 'print_r' || $value['function'] == 'var_dump') {
+                if ($value['function'] == 'print_r' || $value['function'] == 'var_dump' || $value['function'] == 'get_type') {
                     $index = $key;
                     break;
                 }
