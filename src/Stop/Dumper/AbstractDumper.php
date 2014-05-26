@@ -106,8 +106,8 @@ abstract class AbstractDumper implements DumperInterface {
         $dumpArr = array();
         if (is_object($var)) {
             $dumpArr['Class'] = get_class($var);
-            if ($parent = get_parent_class($var)) {
-                $dumpArr['Extends'] = $parent; //@todo get the whole tree
+            if ($parents = class_parents($var)) {
+                $dumpArr['Extends'] = implode("\n", $parents);
             }
             if ($interfaces = class_implements($var)) {
                 $dumpArr['Interfaces'] = implode("\n", $interfaces);

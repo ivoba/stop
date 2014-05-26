@@ -7,11 +7,11 @@ Stop is a lightweight Dumper for PHP 5.3+ , thus a replacement for ```echo '<pre
 [![Total Downloads](https://poser.pugx.org/ivoba/stop/downloads.png)](https://packagist.org/packages/ivoba/stop)
 [![Dependency Status](https://www.versioneye.com/php/ivoba:stop/master/badge.png)](https://www.versioneye.com/php/ivoba:stop/master)
 
-During developing pretty often i find myself typing: ```echo '<pre>';print_r($var);exit;``` or ```var_dump($var);exit;```
+During developing pretty often i found myself typing: ```echo '<pre>';print_r($var);exit;``` or ```var_dump($var);exit;```
 
 So this lib provides:
 
-- shortcuts
+- shortcut functions
 - some more infos as File, Line & Memory
 - some nicer rendering with Twitter Bootstrap,
 - options for return or continue & hide which will print to javascript console
@@ -21,9 +21,9 @@ So this lib provides:
 - context awareness: if you are in console it will render in text mode,
   if in ajax mode it will render in json mode
 - dumper for json strings
- 
+- stop_type as a better version of ```var_dump(get_class($var));exit;```
 
-Its pretty lightweight since it just prints the PHP functions. 
+Its pretty lightweight since it basically just uses PHP functions plus some sugar.
 If you need more power have a look at: https://github.com/raulfraile/ladybug or http://raveren.github.io/kint/  
 
 
@@ -72,7 +72,8 @@ Shortcut functions for options:
 - ```_SDGH($var);``` Stop Dump and Go and Hide! (resp. var_dump)
 - ```_SJ($json);``` Stop Dump as Json! (decodes a json string and send it inside the dump object as json to the browser.
 Use browser addons like JSONovich for pretty rendering.)
-
+- ```_ST($var);``` StopType! (resp. get_type | get_class & class_uses & class_implements & class_parents)
+- ```_STG($var);``` StopType and Go! (resp. get_type | get_class & class_uses & class_implements & class_parents)
 
 ###Static Class Methods:
 
