@@ -24,9 +24,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase {
     public function testPrintReturn() {
         $Stop = new \Stop\Dumper\Bootstrap(false, false, true);
         $output = $Stop->print_r('String');
-        $this->assertContains('<pre>
-                        String
-                        </pre>', $output, 'print_r');
+        $this->assertContains('<pre>String</pre>', $output, 'print_r');
         $this->assertContains('tests/Stop/Tests/BootstrapTest.php', $output, 'File is found');
         $this->assertContains('<strong>Line:</strong> 26', $output, 'Line is found');
         $output = $Stop->print_r(false);
@@ -41,7 +39,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase {
         $this->assertContains('console.log("Stop and Hide!")', $output, 'Hide is found');
         $this->assertContains("console.log(\"\'String\'\")", $output, 'var_dump the variable');
         $this->assertContains('tests/Stop/Tests/BootstrapTest.php', $output, 'File is found');
-        $this->assertContains('console.log("Line: 40")', $output, 'Line is found');
+        $this->assertContains('console.log("Line: 38")', $output, 'Line is found');
 
         $Stop = new \Stop\Dumper\Bootstrap(true, true, true);
         $output = $Stop->var_dump('String');
@@ -54,7 +52,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase {
         $this->assertContains('console.log("Stop and Hide!")', $output, 'Hide is found');
         $this->assertContains('console.log("String")', $output, 'var_dump the variable');
         $this->assertContains('tests/Stop/Tests/BootstrapTest.php', $output, 'File is found');
-        $this->assertContains('console.log("Line: 53")', $output, 'Line is found');
+        $this->assertContains('console.log("Line: 51")', $output, 'Line is found');
 
         $Stop = new \Stop\Dumper\Bootstrap(true, true, true);
         $output = $Stop->var_dump('String');
@@ -69,18 +67,18 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase {
             $format = null);
         $output = $Stop->get_type($Stop);
         $this->assertContains('StopType!', $output);
-        $this->assertContains('<strong>Class:</strong>Stop\Dumper\Bootstrap', $output);
-        $this->assertContains('<strong>Interfaces:</strong>Stop\Dumper\DumperInterface', $output);
+        $this->assertContains('<strong>Class:</strong> Stop\Dumper\Bootstrap', $output);
+        $this->assertContains('<strong>Interfaces:</strong> Stop\Dumper\DumperInterface', $output);
 
         $output = $Stop->get_type(array(1,2,3,4));
         $this->assertContains('StopType!', $output);
-        $this->assertContains('<strong>Type:</strong>array', $output);
-        $this->assertContains('<strong>Count:</strong>4', $output);
+        $this->assertContains('<strong>Type:</strong> array', $output);
+        $this->assertContains('<strong>Count:</strong> 4', $output);
 
         $output = $Stop->get_type($str = "asdasdasd asdasdasd");
         $this->assertContains('StopType!', $output);
-        $this->assertContains('<strong>Type:</strong>string', $output);
-        $this->assertContains('<strong>Length:</strong>19', $output);
+        $this->assertContains('<strong>Type:</strong> string', $output);
+        $this->assertContains('<strong>Length:</strong> 19', $output);
 
     }
 
