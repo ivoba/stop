@@ -112,7 +112,7 @@ abstract class AbstractDumper implements DumperInterface {
             if ($interfaces = class_implements($var)) {
                 $dumpArr['Interfaces'] = implode("\n", $interfaces);
             }
-            if (PHP_VERSION_ID > 50300) {
+            if (function_exists('class_uses')) {
                 if ($traits = class_uses($var)) {
                     $dumpArr['Traits'] = implode("\n", $traits);
                 }
